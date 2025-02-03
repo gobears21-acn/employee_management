@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+        <div>
+            <p>New User? <a href="{% url 'register' %}">Create Account</a></p>
+        </div>
+        <div>
+            <p>Login as admin <span class="tab" style="display:inline-block; 
+       margin-left: 40px;"></span><a href="{% url 'admin_login' %}">Sign In</a></p>
+        </div>
+    </div>
+
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                alert('{{ message }}');
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+</html>

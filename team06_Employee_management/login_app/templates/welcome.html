@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuddyBoard - User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+            display: flex;
+        }
+        .sidebar {
+            width: 260px;
+            background-color: #ffffff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .sidebar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6600;
+            margin-bottom: 30px;
+        }
+        .sidebar .menu-item {
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .sidebar .menu-item:hover {
+            background-color: #f0f0f0;
+        }
+.sidebar .menu-item.active {
+            background-color: #e6f7ff;
+            color: #007bff;
+        }
+        .sidebar .footer {
+            margin-top: auto;
+            text-align: center;
+        }
+        .sidebar .footer button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #ff6600;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .sidebar .footer button:hover {
+            background-color: #e65c00;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .main-content .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .main-content .header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        .main-content .header .profile-pic {
+            display: flex;
+            align-items: center;
+        }
+        .main-content .header .profile-pic img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: #333 solid 2px;
+        }
+        .main-content .header button {
+            padding: 10px 20px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .main-content .header button:hover {
+            background-color: #e65c00;
+        }
+        .main-content .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .info-grid .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .info-grid .card h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .info-grid .card p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .comments {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .comments p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="sidebar">
+        <div class="logo">BuddyBoard</div>
+        <a href="#" class="menu-item active">My Page</a>
+        <a href="#" class="menu-item">Dashboard</a>
+        <a href="#" class="menu-item">Team</a>
+        <a href="#" class="menu-item">Help</a>
+        <a href="#" class="menu-item">Accessibility</a>
+        <div class="footer">
+            <button>Log Out</button>
+        </div>
+    </div>
+ 
+    <div class="main-content">
+        <div class="header">
+            <div class="profile-pic">
+<img src="https://via.placeholder.com/80" alt="Profile Picture">
+                <div>
+                    <h1>Welcome back, {{user}}!</h1>
+                    <p>HR Operations</p>
+                </div>
+            </div>
+            <button>Edit Profile</button>
+        </div>
+ 
+        <div class="info-grid">
+            <div class="card">
+                <h3>Personal Info</h3>
+                <p><strong>Name:</strong> Joe Smith</p>
+                <p><strong>Role:</strong> HR Admin</p>
+                <p><strong>Team:</strong> HR Operations</p>
+                <p><strong>Email:</strong> joe.smith@example.com</p>
+                <p><strong>Office:</strong> Azabu-Juban</p>
+                <p><strong>Level:</strong> 1</p>
+            </div>
+            <div class="card">
+                <h3>Course Info</h3>
+                <p><strong>Course Name:</strong> HR (Basics)</p>
+                <p><strong>Start Date:</strong> 02/03/2024</p>
+                <p><strong>End Date:</strong> 11/03/2024</p>
+                <p><strong>Skills:</strong> Administration</p>
+            </div>
+            <div class="card">
+                <h3>Supervisor</h3>
+                <p><strong>Name:</strong> Taro D. Smith</p>
+                <p><strong>Project:</strong> HR Database</p>
+                <p><strong>Email:</strong> taro.d.smith@example.com</p>
+            </div>
+            <div class="card">
+                <h3>Manager</h3>
+                <p><strong>Name:</strong> Marie Frank</p>
+                <p><strong>Project:</strong> Int. Operations</p>
+                <p><strong>Email:</strong> marie.frank@example.com</p>
+            </div>
+        </div>
+        <div class="comments">
+            <h3>Comments</h3>
+            <ul>
+                <li>Great job on the HR Database project!</li>
+                <li>Keep up the good work!</li>
+                <li>Don't forget to submit your timesheet!</li>
+            </ul>
+        </div>
+    </div>
+ 
+</body>
+</html>
