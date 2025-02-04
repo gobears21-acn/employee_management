@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-import datetime
+import time
 
 
 class RegistrationForm(forms.ModelForm):
@@ -23,3 +23,16 @@ class RegistrationForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput)
+
+def greeting_fun():
+    current_hour = time.localtime().tm_hour
+
+    # Determine the appropriate greeting
+    if 5 <= current_hour < 12:
+        return "Good Morning"
+    elif 12 <= current_hour < 17:
+        return "Good Afternoon"
+    elif 17 <= current_hour < 21:
+        return "Good Evening"
+    else:
+        return "Good Night"

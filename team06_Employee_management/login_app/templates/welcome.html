@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f7fc;
+            background-color: #FFFFEA;
             display: flex;
         }
         .sidebar {
@@ -26,6 +26,36 @@
             color: #ff6600;
             margin-bottom: 30px;
         }
+
+        .sidebar .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 70px;
+        }
+        .sidebar .header h2 {
+            font-size: 20px;
+            color: #333;
+            margin: 0;
+        }
+        .sidebar .header p {
+            color: #333;
+            margin: 0;
+        }
+
+
+        .sidebar .header .profile-pic {
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .header .profile-pic img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 5px;
+            border: #333 solid 1px;
+        }
+
         .sidebar .menu-item {
             padding: 10px 15px;
             margin-bottom: 10px;
@@ -42,6 +72,7 @@
         }
 .sidebar .menu-item.active {
             background-color: #e6f7ff;
+            box-shadow: 2px 2px;
             color: #007bff;
         }
         .sidebar .footer {
@@ -57,6 +88,12 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
+        .sidebar .footer button a{
+            color: white;
+            text-decoration:none;
+        }
+
         .sidebar .footer button:hover {
             background-color: #e65c00;
         }
@@ -64,16 +101,35 @@
             flex: 1;
             padding: 20px;
         }
+
+        .main-content h1 {
+            font-size: 30px;
+            color: #333;
+            margin: 0;
+        }
+        .main-content h1 span{
+            font-size: 30px;
+            color: #08268f;
+            margin: 0;
+        }
+
         .main-content .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
-        .main-content .header h1 {
+        .main-content .header h2 {
             font-size: 24px;
             color: #333;
+            margin: 0;
         }
+
+        .main-content .header p {
+            color: #333;
+            margin: 0;
+        }
+
         .main-content .header .profile-pic {
             display: flex;
             align-items: center;
@@ -86,7 +142,10 @@
             border: #333 solid 2px;
         }
         .main-content .header button {
+            width: 120px;
+            height: 50px;
             padding: 10px 20px;
+            font-size: 16px;
             background-color: #ff6600;
             color: white;
             border: none;
@@ -110,13 +169,22 @@
         }
         .info-grid .card h3 {
             margin-top: 0;
-            color: #007bff;
+            color: #08268f;
+            font-size: 20px;
         }
         .info-grid .card p {
             margin: 10px 0;
             font-size: 16px;
             color: #333;
         }
+
+        .info-grid .card .card-grid{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+
         .comments {
             background-color: white;
             padding: 20px;
@@ -129,66 +197,166 @@
             font-size: 16px;
             color: #333;
         }
+
+        .sidebar hr{
+        width: 100%;
+        color: #08268f;
+        border: 1px solid #08268f;
+        }
+
     </style>
 </head>
 <body>
  
     <div class="sidebar">
         <div class="logo">BuddyBoard</div>
-        <a href="#" class="menu-item active">My Page</a>
-        <a href="#" class="menu-item">Dashboard</a>
-        <a href="#" class="menu-item">Team</a>
-        <a href="#" class="menu-item">Help</a>
-        <a href="#" class="menu-item">Accessibility</a>
-        <div class="footer">
-            <button>Log Out</button>
-        </div>
-    </div>
- 
-    <div class="main-content">
+
         <div class="header">
             <div class="profile-pic">
-<img src="https://via.placeholder.com/80" alt="Profile Picture">
+                <img src="../../sample_img/img_1.jpg" alt="">
                 <div>
-                    <h1>Welcome back, {{user}}!</h1>
+                    <h2>{{username}}</h2>
+                    <p>HR Operations</p>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class = 'top_deck'>
+            <a href="#" class="menu-item active">📄 My Page</a>
+            <a href="#" class="menu-item">📙 Dashboard</a>
+            <a href="#" class="menu-item">🤝 Team</a>
+        </div>
+
+        <div class="footer">
+            <hr>
+            <div class = 'bottom_deck'>
+                <a href="#" class="menu-item">❓ Help</a>
+                <a href="#" class="menu-item">⚙️ Accessibility</a>
+            </div>
+
+            <button><a href="{% url 'index' %}">Log Out</a></button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div>
+          <h1><span>{{greeting}}</span>, {{username}}!</h1>
+        </div>
+        <hr>
+        <br>
+
+
+        <div class="header">
+            <div class="profile-pic">
+                <img src="../../sample_img/img_1.jpg" alt="">
+                <div>
+                    <h2>{{username}}</h2>
                     <p>HR Operations</p>
                 </div>
             </div>
             <button>Edit Profile</button>
         </div>
+
+
  
         <div class="info-grid">
             <div class="card">
-                <h3>Personal Info</h3>
-                <p><strong>Name:</strong> Joe Smith</p>
-                <p><strong>Role:</strong> HR Admin</p>
-                <p><strong>Team:</strong> HR Operations</p>
-                <p><strong>Email:</strong> joe.smith@example.com</p>
-                <p><strong>Office:</strong> Azabu-Juban</p>
-                <p><strong>Level:</strong> 1</p>
+                <h3>Personal Information</h3>
+                <hr>
+                <div class="card-grid">
+                    <div class="card-grid-card">
+                        <p><strong>Name</strong></p>
+                        <p><strong>Role</strong></p>
+                        <p><strong>Team</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>Joe Smith</p>
+                        <p>HR Admin</p>
+                        <p>HR Operations</p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p><strong>Email</strong></p>
+                        <p><strong>Office</strong></p>
+                        <p><strong>Level</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>joe.smith@example.com</p>
+                        <p>Azabu-Juban</p>
+                        <p>1</p>
+                    </div>
+                </div>
             </div>
+
             <div class="card">
-                <h3>Course Info</h3>
-                <p><strong>Course Name:</strong> HR (Basics)</p>
-                <p><strong>Start Date:</strong> 02/03/2024</p>
-                <p><strong>End Date:</strong> 11/03/2024</p>
-                <p><strong>Skills:</strong> Administration</p>
+                <h3>Course Information</h3>
+                <hr>
+                <div class="card-grid">
+                    <div class="card-grid-card">
+                        <p><strong>Course Name</strong></p>
+                        <p><strong>Start Date</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>HR (Basics)</p>
+                        <p>02/03/2024</p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p><strong>Skills</strong></p>
+                        <p><strong>End Date</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>HR (Basics)</p>
+                        <p>02/03/2024</p>
+                    </div>
             </div>
-            <div class="card">
-                <h3>Supervisor</h3>
-                <p><strong>Name:</strong> Taro D. Smith</p>
-                <p><strong>Project:</strong> HR Database</p>
-                <p><strong>Email:</strong> taro.d.smith@example.com</p>
             </div>
+
             <div class="card">
-                <h3>Manager</h3>
-                <p><strong>Name:</strong> Marie Frank</p>
-                <p><strong>Project:</strong> Int. Operations</p>
-                <p><strong>Email:</strong> marie.frank@example.com</p>
+                <h3>My Supervisor</h3>
+                <hr>
+                <div class="card-grid">
+                    <div class="card-grid-card">
+                        <p><strong>Name</strong></p>
+                        <p><strong>Project</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>Taro D. Smith</p>
+                        <p>HR Database</p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p><strong>Email</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>taro.d.smith@example.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>My Manager</h3>
+                <hr>
+                <div class="card-grid">
+                    <div class="card-grid-card">
+                        <p><strong>Name</strong></p>
+                        <p><strong>Project</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>Taro D. Smith</p>
+                        <p>HR Database</p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p><strong>Email</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>taro.d.smith@example.com</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="comments">
             <h3>Comments</h3>
+            <hr>
             <ul>
                 <li>Great job on the HR Database project!</li>
                 <li>Keep up the good work!</li>

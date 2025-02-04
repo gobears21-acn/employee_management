@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.models import User
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, greeting_fun
 from django.contrib import messages
 import datetime
 from django.forms import modelform_factory
@@ -16,7 +16,6 @@ def index(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, 'Login successful!')
                 return redirect('welcome')
             else:
                 messages.error(request, 'Invalid login credentials.')
@@ -66,26 +65,17 @@ def admin_login(request):
     return render(request, 'admin_login.html', {'form': form})
 
 def welcome(request):
+    greeting = greeting_fun()
     user = request.user
     if request.user.is_authenticated:
         user = request.user
-        return render(request, 'welcome.html', {'user': user})
+        username = ' '.join(str(user).split('.'))
+        return render(request, 'welcome.html', {'username': username, 'user': user, 'greeting': greeting})
     
     else:
         messages.error(request, 'You must be logged in to view this page.')
         return redirect('index')
     return render(request, 'welcome.html')
-
-
-
-
-
-
-
-
-
-
-
 
 
 
