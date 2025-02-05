@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}</h1>
+    <p>Your information:</p>
+    <ul>
+        <li>Name: {{ user.employee_name }}</li>
+        <li>Email: {{ user.email }}</li>
+        <li>Management Level: {{ user.management_level }}</li>
+        <li>Home Office: {{ user.home_office }}</li>
+        <li>Position: {{ user.position }}</li>
+        <li>Team ID: {{ user.team_id }}</li>
+    </ul>
+    <a href="{% url 'user_search' %}">Search Users</a>
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>
