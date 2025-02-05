@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +23,10 @@
             background: #FFFFEA;
         }
 
+        img {
+            width: 300px;
+            height: 60px;
+        }
         /* Login container */
         .login-container {
             padding: 20px;
@@ -112,7 +118,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>BuddyBoard</h2>
+        <h2><img src="{% static '\login_app\static\BuddyBoard_Logo.png' %}" alt="BuddyBoard"></h2>
         <p class="header_massage">Building Better Workday!</p>
         <h3>Admin Login</h3>
         <form method="post">

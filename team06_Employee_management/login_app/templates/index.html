@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +21,11 @@
             align-items: center;
             height: 100vh;
             background: #FFFFEA;
+        }
+
+        img {
+            width: 300px;
+            height: 60px;
         }
 
         /* Login container */
@@ -104,7 +111,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>BuddyBoard</h2>
+        <h2><img src="{% static '\login_app\static\BuddyBoard_Logo.png' %}" alt="BuddyBoard"></h2>
         <p class="header_massage">Building Better Workday!</p>
         <form method="post">
             {% csrf_token %}

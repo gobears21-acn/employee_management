@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,11 +29,16 @@
             margin-bottom: 30px;
         }
 
+        .sidebar .logo img {
+            width: 150px;
+            height: 30px;
+        }
+
         .sidebar .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-bottom: 70px;
+            padding-bottom: 50px;
         }
         .sidebar .header h2 {
             font-size: 20px;
@@ -71,9 +78,9 @@
             background-color: #f0f0f0;
         }
 .sidebar .menu-item.active {
-            background-color: #e6f7ff;
+            background-color: #0024BD;
             box-shadow: 2px 2px;
-            color: #007bff;
+            color: #000000;
         }
         .sidebar .footer {
             margin-top: auto;
@@ -109,8 +116,15 @@
         }
         .main-content h1 span{
             font-size: 30px;
-            color: #08268f;
+            color: #0024BD;
             margin: 0;
+        }
+
+        .container{
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .main-content .header {
@@ -160,16 +174,18 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
+            
         }
         .info-grid .card {
             background-color: white;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 2px solid #0024BD;
         }
         .info-grid .card h3 {
             margin-top: 0;
-            color: #08268f;
+            color: #0024BD;
             font-size: 20px;
         }
         .info-grid .card p {
@@ -178,6 +194,18 @@
             color: #333;
         }
 
+        .info-grid .card .card-grid .card-grid-card p{
+            height: 40px;
+        }
+
+        .info-grid .card .card-grid .card-grid-card .email{
+            height: 40px;
+            width: 160px;
+            word-wrap: break-word;
+        }
+
+        
+
         .info-grid .card .card-grid{
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -185,23 +213,38 @@
         }
 
 
-        .comments {
+        .Additional_Information {
             background-color: white;
             padding: 20px;
-            margin: 20px 0;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .comments p {
+
+        .Additional_Information summary {
+            font-size: 20px;
+            color: #0024BD;
+            font-weight: bold;
+        }
+        
+        .Additional_Information ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .Additional_Information ul li {
             margin: 10px 0;
-            font-size: 16px;
-            color: #333;
         }
+
+        .Additional_Information ul li a {
+            text-decoration: none;
+            color: #0024BD;
+            font-size: 16px;
+        }
+
 
         .sidebar hr{
         width: 100%;
-        color: #08268f;
-        border: 1px solid #08268f;
+        color: #0024BD;
+        border: 1px solid #0024BD;
         }
 
     </style>
@@ -209,11 +252,15 @@
 <body>
  
     <div class="sidebar">
-        <div class="logo">BuddyBoard</div>
+        <div class="logo">
+            <img src="{% static '\login_app\static\BuddyBoard_Logo.png' %}" alt="BuddyBoard">
+        </div>
 
         <div class="header">
             <div class="profile-pic">
-                <img src="../../sample_img/img_1.jpg" alt="">
+                <!-- <img src="{% static '\login_app\static\img_1.jpg' %}" alt=""> -->
+                <img src='https://picsum.photos/id/64/4326/2884' alt="">
+                
                 <div>
                     <h2>{{username}}</h2>
                     <p>HR Operations</p>
@@ -240,6 +287,8 @@
         </div>
     </div>
 
+    
+
     <div class="main-content">
         <div>
           <h1><span>{{greeting}}</span>, {{username}}!</h1>
@@ -247,17 +296,18 @@
         <hr>
         <br>
 
-
+        <div class = 'container'>
         <div class="header">
             <div class="profile-pic">
-                <img src="../../sample_img/img_1.jpg" alt="">
+                <img src="https://picsum.photos/id/64/4326/2884" alt="">
                 <div>
                     <h2>{{username}}</h2>
                     <p>HR Operations</p>
                 </div>
             </div>
-            <button>Edit Profile</button>
+            <!-- <button>Edit Profile</button> -->
         </div>
+
 
 
  
@@ -272,9 +322,9 @@
                         <p><strong>Team</strong></p>
                     </div>
                     <div class="card-grid-card">
-                        <p>Joe Smith</p>
-                        <p>HR Admin</p>
-                        <p>HR Operations</p>
+                        <p>{{name}}</p>
+                        <p>{{role}}</p>
+                        <p>{{teamname}}</p>
                     </div>
                     <div class="card-grid-card">
                         <p><strong>Email</strong></p>
@@ -282,9 +332,9 @@
                         <p><strong>Level</strong></p>
                     </div>
                     <div class="card-grid-card">
-                        <p>joe.smith@example.com</p>
-                        <p>Azabu-Juban</p>
-                        <p>1</p>
+                        <p class = 'email'>{{email}}</p>
+                        <p>{{location}}</p>
+                        <p>{{level}}</p>
                     </div>
                 </div>
             </div>
@@ -321,14 +371,14 @@
                         <p><strong>Project</strong></p>
                     </div>
                     <div class="card-grid-card">
-                        <p>Taro D. Smith</p>
-                        <p>HR Database</p>
+                        <p>{{manager_name}}</p>
+                        <p>{{man_project_name}}</p>
                     </div>
                     <div class="card-grid-card">
                         <p><strong>Email</strong></p>
                     </div>
                     <div class="card-grid-card">
-                        <p>taro.d.smith@example.com</p>
+                        <p>{{manager_id}}@example.com</p>
                     </div>
                 </div>
             </div>
@@ -342,28 +392,30 @@
                         <p><strong>Project</strong></p>
                     </div>
                     <div class="card-grid-card">
-                        <p>Taro D. Smith</p>
-                        <p>HR Database</p>
+                        <p>{{pl_name}}</p>
+                        <p>{{pl_project_name}}</p>
                     </div>
                     <div class="card-grid-card">
                         <p><strong>Email</strong></p>
                     </div>
                     <div class="card-grid-card">
-                        <p>taro.d.smith@example.com</p>
+                        <p>{{pl_id}}@example.com</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="comments">
-            <h3>Comments</h3>
-            <hr>
-            <ul>
-                <li>Great job on the HR Database project!</li>
-                <li>Keep up the good work!</li>
-                <li>Don't forget to submit your timesheet!</li>
-            </ul>
+
+        <div class="Additional_Information">
+            <details>
+                <summary>Additonal Information</summary>
+                <ul>
+                    <li><strong><a href="#">Training History</a></strong></li>
+                    <li><strong><a href="#">Feedback</a></strong></li>
+                </ul>
+            </details>
         </div>
     </div>
+</div>
  
 </body>
 </html>

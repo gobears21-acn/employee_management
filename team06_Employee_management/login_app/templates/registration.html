@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +37,11 @@
             font-weight: bold;
             color: #000000;
             margin-bottom: 2px;
+        }
+
+        img {
+            width: 300px;
+            height: 60px;
         }
 
         .header_massage {
@@ -112,7 +119,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>BuddyBoard</h2>
+        <h2><img src="{% static '\login_app\static\BuddyBoard_Logo.png' %}" alt="BuddyBoard"></h2>
         <p class="header_massage">Building Better Workday!</p>
         <h3>Create Account</h3>
         <form method="post">
