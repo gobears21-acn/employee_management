@@ -247,7 +247,7 @@
             <div class="profile-pic">
                 <img src="../../sample_img/img_1.jpg" alt="">
                 <div>
-                    <h2>{{username}}</h2>
+                    <h2>{{ username }}</h2>
                 </div>
             </div>
         </div>
@@ -268,7 +268,7 @@
     </div>
     <div class="main-content">
         <div>
-            <h1><span>Welcome back,</span> {{username}}!</h1>
+            <h1><span>Welcome back,</span> {{ username }}!</h1>
         </div>
         <hr>
         <br>
@@ -302,7 +302,7 @@
                 <div>{{ user.position }}</div>
                 <div>{{ user.team_id }}</div>
                 <div>
-                    <a href="{% url 'delete_user' user.pk %}" class="delete-button">Delete</a>
+                    <a href="{% url 'delete_user' user.id %}" class="delete-button">Delete</a>
                 </div>
             </div>
             {% empty %}
@@ -312,19 +312,5 @@
             {% endfor %}
         </div>
     </div>
-    <script>
-        function searchUsers() {
-            const query = document.getElementById('search-box').value.toLowerCase();
-            const rows = document.querySelectorAll('.table-row');
-            rows.forEach(row => {
-                const name = row.querySelector('div:nth-child(2)').textContent.toLowerCase();
-                if (name.includes(query)) {
-                    row.style.display = 'flex';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-    </script>
 </body>
 </html>
