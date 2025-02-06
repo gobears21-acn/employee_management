@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('login_app.urls')),  
     path('', include('user_search.urls')),
     path('', include('admin_search.urls', namespace='admin_search')),
+    path('', include('feedback.urls')),
     path('team/', include('team.urls')),
     path('help/', views.help, name='help'),
     path('training_detail/', include('training_detail.urls')), 

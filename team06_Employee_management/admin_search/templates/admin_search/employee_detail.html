@@ -1,0 +1,397 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuddyBoard - User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFEA;
+            display: flex;
+        }
+        .sidebar {
+            width: 260px;
+            background-color: #ffffff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .sidebar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6600;
+            margin-bottom: 30px;
+        }
+ 
+        .sidebar .logo img {
+            width: 150px;
+            height: 30px;
+        }
+ 
+        .sidebar .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 50px;
+        }
+        .sidebar .header h2 {
+            font-size: 20px;
+            color: #333;
+            margin: 0;
+        }
+        .sidebar .header p {
+            color: #333;
+            margin: 0;
+        }
+ 
+ 
+        .sidebar .header .profile-pic {
+            display: flex;
+            align-items: center;
+        }
+ 
+        .sidebar .header .profile-pic img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 5px;
+            border: #333 solid 1px;
+        }
+ 
+        .sidebar .menu-item {
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .sidebar .menu-item:hover {
+            background-color: #f0f0f0;
+        }
+.sidebar .menu-item.active {
+            background-color: #0024BD;
+            box-shadow: 2px 2px;
+            color: #000000;
+        }
+        .sidebar .footer {
+            margin-top: auto;
+            text-align: center;
+        }
+        .sidebar .footer button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #ff6600;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+ 
+        .sidebar .footer button a{
+            color: white;
+            text-decoration:none;
+        }
+ 
+        .sidebar .footer button:hover {
+            background-color: #e65c00;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+ 
+        .main-content h1 {
+            font-size: 30px;
+            color: #333;
+            margin: 0;
+        }
+        .main-content h1 span{
+            font-size: 30px;
+            color: #0024BD;
+            margin: 0;
+        }
+ 
+        .container{
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+ 
+        .main-content .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .main-content .header h2 {
+            font-size: 24px;
+            color: #333;
+            margin: 0;
+        }
+ 
+        .main-content .header p {
+            color: #333;
+            margin: 0;
+        }
+ 
+        .main-content .header .profile-pic {
+            display: flex;
+            align-items: center;
+        }
+        .main-content .header .profile-pic img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: #333 solid 2px;
+        }
+        .main-content .header button {
+            width: 120px;
+            height: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .main-content .header button:hover {
+            background-color: #e65c00;
+        }
+        .main-content .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+           
+        }
+        .info-grid .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 2px solid #0024BD;
+        }
+        .info-grid .card h3 {
+            margin-top: 0;
+            color: #0024BD;
+            font-size: 20px;
+        }
+        .info-grid .card p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #333;
+        }
+ 
+        .info-grid .card .card-grid .card-grid-card p{
+            height: 40px;
+        }
+ 
+        .info-grid .card .card-grid .card-grid-card .email{
+            height: 40px;
+            width: 160px;
+            word-wrap: break-word;
+        }
+ 
+       
+ 
+        .info-grid .card .card-grid{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+ 
+ 
+        .Additional_Information {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+        }
+ 
+        .Additional_Information summary {
+            font-size: 20px;
+            color: #0024BD;
+            font-weight: bold;
+        }
+       
+        .Additional_Information ul {
+            list-style-type: none;
+            padding: 0;
+        }
+ 
+        .Additional_Information ul li {
+            margin: 10px 0;
+        }
+ 
+        .Additional_Information ul li a {
+            text-decoration: none;
+            color: #0024BD;
+            font-size: 16px;
+        }
+        /* Go Back Button */
+        .go-back-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0024BD;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+ 
+        .sidebar hr{
+        width: 100%;
+        color: #0024BD;
+        border: 1px solid #0024BD;
+        }
+    </style>
+</head>
+<body>
+ 
+   
+ <div class="main-content">
+        <div>
+          <h1> {{username}}!</h1>
+        </div>
+        <hr>
+        <br>
+ 
+        <div class = 'container'>
+        <div class="header">
+            <div class="profile-pic">
+                <img src='{{image}}' alt="profile Picture">
+                <div>
+ 
+                    <h2>{{username}}</h2>
+                    <p>{{role}}</p>
+                </div>
+            </div>
+            <!-- <button>Edit Profile</button> -->
+        </div>
+ 
+ 
+ 
+ 
+        <div class="info-grid">
+            <div class="card">
+                <h3>Personal Information</h3>
+                <hr>
+                <div class="card-grid">
+                    <div class="card-grid-card">
+                        <p><strong>Name</strong></p>
+                        <p><strong>Role</strong></p>
+                        <p><strong>Team</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>{{name}}</p>
+                        <p>{{role}}</p>
+                        <p>{{teamname}}</p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p><strong>Email</strong></p>
+                        <p><strong>Office</strong></p>
+                        <p><strong>Level</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p class = 'email'>{{email}}</p>
+                        <p>{{location}}</p>
+                        <p>{{level}}</p>
+                    </div>
+                </div>
+            </div>
+ 
+            <div class="card">
+                <h3>Course Information</h3>
+                <hr>
+                <div class="card-grid">
+                    <div class="card-grid-card">
+                        <p><strong>Course Name</strong></p>
+                        <p><strong>Start Date</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>HR (Basics)</p>
+                        <p>02/03/2024</p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p><strong>Skills</strong></p>
+                        <p><strong>End Date</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>HR (Basics)</p>
+                        <p>02/03/2024</p>
+                    </div>
+            </div>
+            </div>
+ 
+            <div class="card">
+                <h3> Supervisor</h3>
+                <hr>
+                <div class="card-grid">
+                    <div class="card-grid-card">
+                        <p><strong>Name</strong></p>
+                        <p><strong>Project</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>{{manager_name}}</p>
+                        <p>{{man_project_name}}</p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p><strong>Email</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>{{manager_id}}@example.com</p>
+                    </div>
+                </div>
+            </div>
+ 
+            <div class="card">
+                <h3> Manager</h3>
+                <hr>
+                <div class="card-grid">
+                    <div class="card-grid-card">
+                        <p><strong>Name</strong></p>
+                        <p><strong>Project</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>{{pl_name}}</p>
+                        <p>{{pl_project_name}}</p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p><strong>Email</strong></p>
+                    </div>
+                    <div class="card-grid-card">
+                        <p>{{pl_id}}@example.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+        <div class="Additional_Information">
+            <details>
+                <summary>Additonal Information</summary>
+                <ul>
+                    <li><strong><a href="#">Training History</a></strong></li>
+                    <li><strong><a href="{% url 'feedback' eid=employee_id %}">Feedback</a></strong></li>
+                </ul>
+            </details>
+        </div>
+    </div>
+</div>
+<button class="go-back-btn" onclick="window.history.back();">Back</button>
+</body>
+</html>
+ 

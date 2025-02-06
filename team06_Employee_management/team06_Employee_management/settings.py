@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'team',
     'user_search',
     'training_detail',
+    'feedback',
 ]
 
 MIDDLEWARE = [

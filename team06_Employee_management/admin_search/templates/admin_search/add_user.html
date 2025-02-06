@@ -206,6 +206,19 @@
         .form-container button:hover {
             background-color: #0056b3;
         }
+        .form-container button {
+            padding: 10px 20px;
+            background: #FF7344;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        .form-container button:hover {
+            background: #e06234;
+        }
     </style>
 </head>
 <body>
@@ -247,6 +260,7 @@
                 {{ form.as_p }}
                 <button type="submit">Add User</button>
             </form>
+            <button onclick="window.location.href='{% url 'admin_search:admin_search' %}'">Back to Admin Search</button>
         </div>
     </div>
 </body>
