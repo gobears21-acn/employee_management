@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add User</title>
+    <title>BuddyBoard - Admin Search</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -173,38 +173,70 @@
             color: #08268f;
             border: 1px solid #08268f;
         }
-        .form-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .form-container form {
+        .search-container {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
         }
-        .form-container label {
-            margin-bottom: 5px;
+        .search-box {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .search-button {
+            padding: 10px 20px;
+            background: #FF7344;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .search-button:hover {
+            background: #e06234;
+        }
+        .table-container {
+            width: 100%;
+        }
+        .table-header, .table-row {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .table-header {
+            background: #0024BD;
+            color: #FFF;
             font-weight: bold;
         }
-        .form-container input[type="text"], .form-container input[type="email"], .form-container input[type="date"], .form-container select {
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+        .table-header div, .table-row div {
+            flex: 1;
+            text-align: center;
+            padding: 0 10px;
         }
-        .form-container button {
-            padding: 10px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: #fff;
+        .profile-picture {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .action-buttons button {
+            padding: 10px 20px;
+            background: #FF7344;
+            color: #FFF;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background 0.3s;
         }
-        .form-container button:hover {
-            background-color: #0056b3;
+        .action-buttons button:hover {
+            background: #e06234;
         }
     </style>
 </head>
@@ -240,14 +272,49 @@
         </div>
         <hr>
         <br>
-        <div class="form-container">
-            <h2>Add User</h2>
-            <form method="post" action="{% url 'admin_search:add_user' %}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Add User</button>
+        <div class="search-container">
+            <form method="get" action="{% url 'admin_search:admin_search' %}">
+                <input type="text" name="q" class="search-box" placeholder="Search users">
+                <button type="submit" class="search-button">🔍</button>
             </form>
         </div>
+        <div class="action-buttons">
+            <button onclick="window.location.href='{% url 'admin_search:add_user' %}'">Add User</button>
+        </div>
+        {% if users %}
+        <div class="table-container">
+            <div class="table-header">
+                <div>Profile</div>
+                <div>Name</div>
+                <div>Management Level</div>
+                <div>Email</div>
+                <div>Office</div>
+                <div>Position</div>
+                <div>Team ID</div>
+                <div>Actions</div>
+            </div>
+            {% for user in users %}
+            <div class="table-row">
+                <div><img src="{{ user.profile_image.url }}" class="profile-picture" alt="Profile Picture"></div>
+                <div>{{ user.employee_name }}</div>
+                <div>{{ user.management_level }}</div>
+                <div>{{ user.email }}</div>
+                <div>{{ user.home_office }}</div>
+                <div>{{ user.position }}</div>
+                <div>{{ user.team_id }}</div>
+                <div>
+                    {% if user.id %}
+                    <a href="{% url 'admin_search:delete_user' user.id %}" class="delete-button">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="table-row">
+            <div colspan="8">No users found.</div>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>

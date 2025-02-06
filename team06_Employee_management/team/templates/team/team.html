@@ -233,18 +233,7 @@
                 <p>{{ member.email }}</p>
             </div>
             {% empty %}
-            <div class="team-container">
-                {% for member in members %}
-                <div class="team-member">
-                    <img src="{{ member.profile_image }}" alt="Profile Picture">
-                    <h3>{{ member.employee_name }}</h3>
-                    <p>{{ member.member_position }}</p>
-                    <p>{{ member.email }}</p>
-                </div>
-                {% empty %}
-                <p>No team members found.</p>
-                {% endfor %}
-            </div>
+            <p>No team members found.</p>
+            {% endfor %}
         </div>
-    </body>
-    </html>
+    </div>

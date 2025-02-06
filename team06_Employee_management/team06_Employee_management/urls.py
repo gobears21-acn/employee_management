@@ -26,6 +26,7 @@ urlpatterns = [
     path('user_home/', include('user_home.urls')),
     path('admin_home/', include('admin_home.urls')),
     path('user_search/', include('user_search.urls')),
-    path('admin_search/', include('admin_search.urls')),
+    path('admin/', admin.site.urls),
+    path('admin_search/', include('admin_search.urls', namespace='admin_search')),
     path('team/', include('team.urls')),
 ]

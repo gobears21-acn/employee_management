@@ -273,14 +273,15 @@
         <hr>
         <br>
         <div class="search-container">
-            <form method="get" action="{% url 'admin_search' %}">
+            <form method="get" action="{% url 'admin_search:admin_search' %}">
                 <input type="text" name="q" class="search-box" placeholder="Search users">
                 <button type="submit" class="search-button">🔍</button>
             </form>
         </div>
         <div class="action-buttons">
-            <button onclick="window.location.href='{% url 'add_user' %}'">Add User</button>
+            <button onclick="window.location.href='{% url 'admin_search:add_user' %}'">Add User</button>
         </div>
+        {% if users %}
         <div class="table-container">
             <div class="table-header">
                 <div>Profile</div>
@@ -295,22 +296,25 @@
             {% for user in users %}
             <div class="table-row">
                 <div><img src="{{ user.profile_image.url }}" class="profile-picture" alt="Profile Picture"></div>
-                <div>{{ user.employee_name }}</div>
-                <div>{{ user.management_level }}</div>
-                <div>{{ user.email }}</div>
-                <div>{{ user.home_office }}</div>
-                <div>{{ user.position }}</div>
-                <div>{{ user.team_id }}</div>
+                <div>{{ user.Employee_Name }}</div>
+                <div>{{ user.Management_Level }}</div>
+                <div>{{ user.Email }}</div>
+                <div>{{ user.Home_Office }}</div>
+                <div>{{ user.Position }}</div>
+                <div>{{ user.Team_ID }}</div>
                 <div>
-                    <a href="{% url 'delete_user' user.id %}" class="delete-button">Delete</a>
+                    {% if user.EID %}
+                    <a href="{% url 'admin_search:delete_user' user.EID %}" class="delete-button">Delete</a>
+                    {% endif %}
                 </div>
-            </div>
-            {% empty %}
-            <div class="table-row">
-                <div colspan="8">No users found.</div>
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="table-row">
+            <div colspan="8">No users found.</div>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>
