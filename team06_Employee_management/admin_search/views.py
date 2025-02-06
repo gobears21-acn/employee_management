@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import CustomUserCreationForm
+from django.contrib import messages
 import MySQLdb
 
 def get_db_connection():
@@ -101,3 +102,67 @@ def add_user(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'admin_search/add_user.html', {'form': form})
+
+def employee_detail(request, id):
+    db = get_db_connection()
+    user = id
+    try:
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM `employee_details` WHERE EID = %s;", [str(user)])
+        userdata = cursor.fetchall()[0]
+        employee_id = userdata[1]
+        name = userdata[0]
+        role = userdata[5]
+        email = userdata[3]
+        location = userdata[7]
+        level = userdata[6]
+        image = userdata[12]
+        
+        cursor.execute("SELECT * FROM `team_details` WHERE team_id = %s;", [str(userdata[8])])
+        team = cursor.fetchall()[0]
+        teamname = team[1]
+ 
+        cursor.execute("""SELECT t1.EID as eid, t2.manager_id, t2.manager_name, t4.project_name,t3.pl_id,t3.pl_name,t5.project_name
+                                FROM `employee_details` as t1
+                                INNER JOIN
+                                manager_details as t2
+                                ON t1.Manager_ID = t2.manager_id
+                                INNER JOIN
+                                people_lead_details as t3
+                                ON t1.PL_ID = t3.pl_id
+                                INNER JOIN
+                                team_details as t4
+                                ON t2.team_id = t4.team_id
+                                INNER JOIN
+                                team_details as t5
+                                ON t3.team_id = t5.team_id
+                                WHERE eid = %s;""", [str(user)])
+        add_info = cursor.fetchall()[0]
+        manager_id = add_info[1]
+        manager_name = add_info[2]
+        man_project_name = add_info[3]
+        pl_id = add_info[4]
+        pl_name = add_info[5]
+        pl_project_name = add_info[6]
+ 
+    except:
+        messages.error(request, 'User Data Found')
+    
+    username = ' '.join(str(user).split('.')).title()
+    return render(request, 'user_search/employee_detail.html', {'username': username,
+                                                'user': user,
+                                                'employee_id': employee_id, 
+                                                'name': name,
+                                                'role': role,
+                                                'email': email,
+                                                'location': location,
+                                                'level': level,
+                                                'teamname': teamname,
+                                                'manager_id': manager_id,
+                                                'image': image,
+                                                'manager_name': manager_name,
+                                                'man_project_name': man_project_name,
+                                                'pl_id': pl_id,
+                                                'pl_name': pl_name,
+                                                'pl_project_name': pl_project_name,
+                                                })

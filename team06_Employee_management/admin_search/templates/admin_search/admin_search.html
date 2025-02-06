@@ -296,6 +296,7 @@
             {% for user in users %}
             <div class="table-row">
                 <div><img src="{{ user.Profile_Image }}" class="profile-picture" alt="Profile Picture"></div>
+                <div><a href="{% url 'employee_detail' user.EID %}">{{ user.Employee_Name }}</a></div>
                 <div>{{ user.Employee_Name }}</div>
                 <div>{{ user.Management_Level }}</div>
                 <div>{{ user.Email }}</div>
