@@ -228,9 +228,9 @@
         <div class="logo">BuddyBoard</div>
         <div class="header">
             <div class="profile-pic">
-                <img src="{{ user.Profile_Image }}" class="profile-picture" alt="Profile Picture">
+                <img src="{{ user_image }}" alt="Profile Picture">
                 <div>
-                    <h2>{{ username }}</h2>
+                    <h2>{{ request.user.username }}</h2>
                 </div>
             </div>
         </div>
