@@ -17,11 +17,11 @@ def team(request):
     try:
         with db.cursor() as cursor:
             if query:
-                cursor.execute("SELECT * FROM team WHERE team_identifier = %s", (query,))
+                cursor.execute("SELECT * FROM team_details WHERE team_id = %s", (query,))
                 team_data = cursor.fetchone()
                 if team_data:
                     team_id = team_data[0]  # Assuming the first column is the team ID
-                    cursor.execute("SELECT * FROM team_member WHERE team_id = %s", (team_id,))
+                    cursor.execute("SELECT * FROM employee_details WHERE Team_ID = %s", (team_id,))
                     members_data = cursor.fetchall()
                     columns = [col[0] for col in cursor.description]
                     members = [dict(zip(columns, row)) for row in members_data]

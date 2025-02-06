@@ -228,9 +228,9 @@
             {% for member in members %}
             <div class="team-member">
                 <img src="{{ member.profile_image }}" alt="Profile Picture">
-                <h3>{{ member.employee_name }}</h3>
-                <p>{{ member.member_position }}</p>
-                <p>{{ member.email }}</p>
+                <h3>{{ member.Employee_Name }}</h3>
+                <p>{{ member.Position }}</p>
+                <p>{{ member.Email }}</p>
             </div>
             {% empty %}
             <p>No team members found.</p>
