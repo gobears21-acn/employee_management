@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 
 urlpatterns = [
@@ -24,4 +25,5 @@ urlpatterns = [
     path('', include('user_search.urls')),
     path('', include('admin_search.urls', namespace='admin_search')),
     path('team/', include('team.urls')),
+    path('help/', views.help, name='help'),
 ]

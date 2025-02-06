@@ -2,15 +2,15 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 import MySQLdb
 
-def get_db_connection():
-    # Establish the database connection
-    db = MySQLdb.connect(
-        host="localhost",
-        user="root",
-        passwd="",  # Make sure to include the password if needed
-        db="system_development_t06"
-    )
-    return db
+# def get_db_connection():
+#     # Establish the database connection
+#     db = MySQLdb.connect(
+#         host="localhost",
+#         user="root",
+#         passwd="",  # Make sure to include the password if needed
+#         db="system_development_t06"
+#     )
+#     return db
 
 # def user_search(request):
 #     db = get_db_connection()
@@ -75,7 +75,8 @@ def user_search(request):
         db.close()
 
 
-
+def help(request):
+    return render(request, 'help.html')
 
 def welcome(request):
     return render(request, 'welcome.html')

@@ -206,7 +206,7 @@
         <div class="footer">
             <hr>
             <div class='bottom_deck'>
-                <a href="#" class="menu-item">❓ Help</a>
+                <a href="{% url 'help' %}" class="menu-item">❓ Help</a>
                 <a href="#" class="menu-item">⚙️ Accessibility</a>
             </div>
             <button><a href="{% url 'index' %}">Log Out</a></button>
@@ -214,7 +214,7 @@
     </div>
     <div class="main-content">
         <div>
-            <h1><span>Welcome back,</span> {{ username }}!</h1>
+            <h1><span>Welcome back,</span> {{ request.user.username }}!</h1>
         </div>
         <hr>
         <br>

@@ -67,6 +67,9 @@ def get_db_connection():
     )
     return db
 
+def help(request):
+    return render(request, 'help.html')
+
 @login_required
 def team(request):
     db = get_db_connection()

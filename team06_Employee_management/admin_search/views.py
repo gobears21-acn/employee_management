@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-# from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .forms import CustomUserCreationForm
 import MySQLdb
 
 def get_db_connection():
@@ -11,9 +12,21 @@ def get_db_connection():
     )
     return db
 
+
+def is_admin(user):
+    return user.username == 'myadmin'
+
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+def is_admin(user):
+    return user.username == 'myadmin'
+
+@login_required
+@user_passes_test(is_admin)
 def admin_search(request):
     db = get_db_connection()
     query = request.GET.get('q')
+    user_id = request.user.username  # Assuming the username is the same as EID
     try:
         with db.cursor() as cursor:
             if query:
@@ -25,10 +38,16 @@ def admin_search(request):
             data = cursor.fetchall()
             users = [dict(zip(columns, row)) for row in data]
 
-            return render(request, 'admin_search/admin_search.html', {'users': users})
+            # 获取当前登录用户的 EID
+            user_eid = request.user.username
+            # 获取当前登录用户的头像
+            cursor.execute("SELECT Profile_Image FROM employee_details WHERE EID = %s", [user_id])
+            user_image = cursor.fetchone()[0]
+
+            return render(request, 'admin_search/admin_search.html', {'users': users, 'user_eid': user_eid, 'user_image': user_image})
     except MySQLdb.Error as e:
         print("Database error:", e)
-        return render(request, 'admin_search/admin_search.html', {'users': []})
+        return render(request, 'admin_search/admin_search.html', {'users': [], 'user_eid': None, 'user_image': None})
     finally:
         db.close()
 
@@ -38,7 +57,7 @@ def delete_user(request, EID):
     db = get_db_connection()
     try:
         with db.cursor() as cursor:
-            cursor.execute("DELETE FROM employee_details WHERE id = %s", (EID,))
+            cursor.execute("DELETE FROM employee_details WHERE EID = %s", (EID,))
             db.commit()
         return redirect('admin_search:admin_search')
     except MySQLdb.Error as e:
@@ -47,37 +66,38 @@ def delete_user(request, EID):
     finally:
         db.close()
 
-# def add_user(request):
-#     if request.method == 'POST':
-#         form = CustomUserCreationForm(request.POST)
-#         if form.is_valid():
-#             db = get_db_connection()
-#             try:
-#                 with db.cursor() as cursor:
-#                     cursor.execute("""
-#                         INSERT INTO employee_details (employee_name, employee_number, email, date_of_birth, role, management_level, home_office, team_id, position, pl_id, manager_id, profile_image)
-#                         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-#                     """, (
-#                         form.cleaned_data['employee_name'],
-#                         form.cleaned_data['employee_number'],
-#                         form.cleaned_data['email'],
-#                         form.cleaned_data['date_of_birth'],
-#                         form.cleaned_data['role'],
-#                         form.cleaned_data['management_level'],
-#                         form.cleaned_data['home_office'],
-#                         form.cleaned_data['team_id'],
-#                         form.cleaned_data['position'],
-#                         form.cleaned_data['pl_id'],
-#                         form.cleaned_data['manager_id'],
-#                         form.cleaned_data['profile_image']
-#                     ))
-#                     db.commit()
-#                 return redirect('admin_search:admin_search')
-#             except MySQLdb.Error as e:
-#                 print("Database error:", e)
-#                 return render(request, 'admin_search/add_user.html', {'form': form})
-#             finally:
-#                 db.close()
-#     else:
-#         form = CustomUserCreationForm()
-#     return render(request, 'admin_search/add_user.html', {'form': form})
+
+def add_user(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            db = get_db_connection()
+            try:
+                with db.cursor() as cursor:
+                    cursor.execute("""
+                        INSERT INTO employee_details (Employee_Name, Employee_Number, Email, Date_of_Birth, Role, Management_Level, Home_Office, Team_ID, Position, PL_ID, Manager_ID, Profile_Image)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    """, (
+                        form.cleaned_data['employee_name'],
+                        form.cleaned_data['employee_number'],
+                        form.cleaned_data['email'],
+                        form.cleaned_data['date_of_birth'],
+                        form.cleaned_data['role'],
+                        form.cleaned_data['management_level'],
+                        form.cleaned_data['home_office'],
+                        form.cleaned_data['team_id'],
+                        form.cleaned_data['position'],
+                        form.cleaned_data['pl_id'],
+                        form.cleaned_data['manager_id'],
+                        form.cleaned_data['profile_image']
+                    ))
+                    db.commit()
+                return redirect('admin_search:admin_search')
+            except MySQLdb.Error as e:
+                print("Database error:", e)
+                return render(request, 'admin_search/add_user.html', {'form': form})
+            finally:
+                db.close()
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'admin_search/add_user.html', {'form': form})

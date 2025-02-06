@@ -273,14 +273,14 @@
 
         <div class = 'top_deck'>
             <a href="#" class="menu-item active">📄 My Page</a>
-            <a href="/user_search" class="menu-item">📙 Dashboard</a>
+            <a href="{% if is_admin %}{% url 'admin_search:admin_search' %}{% else %}{% url 'user_search' %}{% endif %}" class="menu-item">📙 Dashboard</a>
             <a href="/team/team" class="menu-item">🤝 Team</a>
         </div>
 
         <div class="footer">
             <hr>
             <div class = 'bottom_deck'>
-                <a href="#" class="menu-item">❓ Help</a>
+                <a href="{% url 'help' %}" class="menu-item">❓ Help</a>
                 <a href="#" class="menu-item">⚙️ Accessibility</a>
             </div>
 
