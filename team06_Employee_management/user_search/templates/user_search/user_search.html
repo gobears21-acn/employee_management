@@ -228,7 +228,7 @@
         <div class="logo">BuddyBoard</div>
         <div class="header">
             <div class="profile-pic">
-                <img src="../../sample_img/img_1.jpg" alt="">
+                <img src="{{ user.Profile_Image }}" class="profile-picture" alt="Profile Picture">
                 <div>
                     <h2>{{ username }}</h2>
                 </div>
@@ -273,7 +273,7 @@
             </div>
             {% for user in users %}
             <div class="table-row">
-                <div><img src="{{ user.profile_image.url }}" class="profile-picture" alt="Profile Picture"></div>
+                <div><img src="{{ user.Profile_Image }}" class="profile-picture" alt="Profile Picture"></div>
                 <div>{{ user.Employee_Name }}</div>
                 <div>{{ user.Management_Level }}</div>
                 <div>{{ user.Email }}</div>
