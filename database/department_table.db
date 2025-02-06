@@ -1,0 +1,6 @@
+CREATE TABLE Department (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    member_count INTEGER DEFAULT 0
+);

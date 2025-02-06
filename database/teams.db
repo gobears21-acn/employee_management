@@ -1,0 +1,6 @@
+CREATE TABLE Team (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    project_name VARCHAR(100),
+    lead_manager INTEGER REFERENCES Employee(id)
+);

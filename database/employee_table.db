@@ -1,0 +1,15 @@
+CREATE TABLE Employee (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES User(id),
+    name VARCHAR(100) NOT NULL,
+    employee_number VARCHAR(50) UNIQUE NOT NULL,
+    date_of_birth DATE,
+    role VARCHAR(100),
+    management_level VARCHAR(100),
+    team_id INTEGER REFERENCES Team(id),
+    position VARCHAR(100),
+    pl_id VARCHAR(50),
+    manager_id INTEGER REFERENCES Employee(id),
+    email VARCHAR(100),
+    office VARCHAR(100)
+);

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuddyBoard - Team</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFEA;
+            display: flex;
+        }
+        .sidebar {
+            width: 260px;
+            background-color: #ffffff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .sidebar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6600;
+            margin-bottom: 30px;
+        }
+        . margin: 0;
+        }
+        .sidebar .header p {
+            color: #333;
+            margin: 0;
+        }
+        .sidebar .header .profile-pic {
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .header .profile-pic img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 5px;
+            border: #333 solid 1px;
+        }
+        .sidebar .menu-item {
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .sidebar .menu-item:hover {
+            background-color: #f0f0f0;
+        }
+        .sidebar .menu-item.active {
+            background-color: #e6f7ff;
+            box-shadow: 2px 2px;
+            color: #007bff;
+        }
+        .sidebar .footer {
+            margin-top: auto;
+            text-align: center;
+        }
+        .sidebar .footer button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #ff6600;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .sidebar .footer button a {
+            color: white;
+            text-decoration: none;
+        }
+        .sidebar .footer button:hover {
+            background-color: #e65c00;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .main-content h1 {
+            font-size: 30px;
+            color: #333;
+            margin: 0;
+        }
+        .main-content h1 span {
+            font-size: 30px;
+            color: #08268f;
+            margin: 0;
+        }
+        .main-content .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .main-content .header h2 {
+            font-size: 24px;
+            color: #333;
+            margin: 0;
+        }
+        .main-content .header p {
+            color: #333;
+            margin: 0;
+        }
+        .main-content .header .profile-pic {
+            display: flex;
+            align-items: center;
+        }
+        .main-content .header .profile-pic img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: #333 solid 2px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .search-button {
+            padding: 10px 20px;
+            background: #FF7344;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .search-button:hover {
+            background: #e06234;
+        }
+        .team-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .team-member {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: calc(33.333% - 20px);
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .team-member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .team-member h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .team-member p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">BuddyBoard</div>
+        <div class="header">
+            <div class="profile-pic">
+                <img src="../../sample_img/img_1.jpg" alt="">
+                <div>
+                    <h2>{{ username }}</h2>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class='top_deck'>
+            <a href="{% url 'welcome' %}" class="menu-item">📄 My Page</a>
+            <a href="#" class="menu-item">📙 Dashboard</a>
+            <a href="{% url 'team' %}" class="menu-item active">🤝 Team</a>
+        </div>
+        <div class="footer">
+            <hr>
+            <div class='bottom_deck'>
+                <a href="#" class="menu-item">❓ Help</a>
+                <a href="#" class="menu-item">⚙️ Accessibility</a>
+            </div>
+            <button><a href="{% url 'index' %}">Log Out</a></button>
+        </div>
+    </div>
+    <div class="main-content">
+        <div>
+            <h1><span>Welcome back,</span> {{ username }}!</h1>
+        </div>
+        <hr>
+        <br>
+        <div class="search-container">
+            <form method="get" action="{% url 'team' %}">
+                <input type="text" name="team_identifier" class="search-box" placeholder="Search team ID">
+                <button type="submit" class="search-button">🔍</button>
+            </form>
+        </div>
+        <div class="team-container">
+            {% for member in members %}
+            <div class="team-member">
+                <img src="{{ member.user.profile_image.url }}" alt="Profile Picture">
+                <h3>{{ member.user.employee_name }}</h3>
+                <p>{{ member.member_position }}</p>
+                <p>{{ member.user.email }}</p>
+            </div>
+            {% empty %}
+            <p>No team members found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
