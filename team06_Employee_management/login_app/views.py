@@ -98,6 +98,8 @@ def welcome(request):
             email = userdata[3]
             location = userdata[7]
             level = userdata[6]
+            image = userdata[12]
+            print(image,'yes')
 
 
 
@@ -127,8 +129,6 @@ def welcome(request):
             pl_id = add_info[4]
             pl_name = add_info[5]
             pl_project_name = add_info[6]
-            
-
 
 
 
@@ -144,6 +144,7 @@ def welcome(request):
                                                 'level': level,
                                                 'teamname': teamname,
                                                 'manager_id': manager_id,
+                                                'image': image,
                                                 'manager_name': manager_name,
                                                 'man_project_name':man_project_name,
                                                 'pl_id': pl_id,

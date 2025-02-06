@@ -55,6 +55,7 @@
             display: flex;
             align-items: center;
         }
+
         .sidebar .header .profile-pic img {
             width: 50px;
             height: 50px;
@@ -253,13 +254,13 @@
  
     <div class="sidebar">
         <div class="logo">
-            <img src="{% static 'BuddyBoard_Logo.png' %}" alt="BuddyBoard">
+            <img src="{% static 'images/BuddyBoard_Logo.png' %}" alt="BuddyBoard">
         </div>
 
         <div class="header">
             <div class="profile-pic">
                 <!-- <img src="{% static '\login_app\static\img_1.jpg' %}" alt=""> -->
-                <img src='https://picsum.photos/id/64/4326/2884' alt="">
+                <img src='{{image}}' alt="profile Picture">
                 
                 <div>
                     <h2>{{username}}</h2>
@@ -299,8 +300,9 @@
         <div class = 'container'>
         <div class="header">
             <div class="profile-pic">
-                <img src="https://picsum.photos/id/64/4326/2884" alt="">
+                <img src='{{image}}' alt="profile Picture">
                 <div>
+
                     <h2>{{username}}</h2>
                     <p>HR Operations</p>
                 </div>
