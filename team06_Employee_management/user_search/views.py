@@ -17,7 +17,7 @@ def user_search(request):
     try:
         with db.cursor() as cursor:
             if query:
-                cursor.execute("SELECT * FROM employee_details WHERE username LIKE %s", ('%' + query + '%',))
+                cursor.execute("SELECT * FROM employee_details WHERE Employee_Name LIKE %s", ('%' + query + '%',))
             else:
                 cursor.execute("SELECT * FROM employee_details")
             
@@ -31,6 +31,9 @@ def user_search(request):
         return render(request, 'user_search/user_search.html', {'users': []})
     finally:
         db.close()
+
+
+
 
 def welcome(request):
     return render(request, 'welcome.html')
