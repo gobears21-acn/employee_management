@@ -86,8 +86,10 @@ def admin_login(request):
 def welcome(request):
     greeting = greeting_fun()
     user = request.user
+    print(user, 'yes')
     if request.user.is_authenticated:
         user = request.user
+        print(user, 'yes')
         try:
             cursor = db.cursor()
             cursor.execute("SELECT * FROM `employee_details` WHERE EID = %s;", [str(user)])
